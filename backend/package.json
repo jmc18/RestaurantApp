@@ -5,18 +5,25 @@
   "main": "src/index.js",
   "scripts": {
     "build": "tsc",
-    "prestart": "npm run build",
-    "start": "nodemon src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./dist/index",
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "mssql": "^6.3.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.32"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.9",
+    "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.35",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
