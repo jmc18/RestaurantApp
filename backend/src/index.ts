@@ -4,7 +4,7 @@ import cors from 'cors'
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 
-import userRoutes from './routes/user.routes'
+import rolesRoutes from './routes/roles.routes'
 
 const app = express()
 
@@ -19,7 +19,7 @@ createConnection().then(connection => {
   }).catch(error => console.log(error));
 
 // Routes
-app.use(userRoutes)
+app.use(rolesRoutes)
 
 const PORT = 3000
 app.get('/', (req, res) => res.send('Express + TypeScript'))
