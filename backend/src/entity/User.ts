@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm'
 import { Role } from './Role'
+import {Order} from './Order'
 
  @Entity()
  export class User {
@@ -36,4 +37,7 @@ import { Role } from './Role'
 
     @Column({type: 'bit'})
     isActive: string
+
+    @OneToMany(() => Order, order => order.user)
+     order: Order
  }

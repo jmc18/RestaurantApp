@@ -12,12 +12,12 @@
       },
     "synchronize": true,
     "logging": false,
-    "entities": ["dist/entity/**/*.js"],
-    "migrations": ["migration/**/*.js"],
-    "subscribers": ["subscriber/**/*.js"],
+    "entities": ["src/entity/**/*.ts"],
+    "migrations": ["src/migration/**/*.ts"],
+    "subscribers": ["src/subscriber/**/*.ts"],
     "cli": {
-        "entitiesDir": "dist/entity",
-        "migrationsDir": "migration",
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
         "subscribersDir": "src/subscriber"
     }
  }
