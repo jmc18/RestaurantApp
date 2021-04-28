@@ -1,6 +1,7 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm'
 import {Table} from './Table'
 import {User} from './User'
+import {Plate} from './Plate'
 
 @Entity()
 export class Order {
@@ -22,5 +23,8 @@ export class Order {
 
     @ManyToOne(() => Table, table => table.order)
     table: Table;
+
+    @OneToMany(() => Plate, plate => plate.orders)
+     plates: Plate
 
 }
