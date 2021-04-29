@@ -1,8 +1,12 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm'
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, Unique} from 'typeorm'
 import { Role } from './Role'
 import {Order} from './Order'
 
+import {Length, IsNotEmpty} from 'class-validator'
+import * as bcrypt from 'bcryptjs'
+
  @Entity()
+ @Unique(["nickname, email"])
  export class User {
 
     @PrimaryGeneratedColumn('uuid')
@@ -12,18 +16,23 @@ import {Order} from './Order'
      role: Role
 
      @Column()
+     @Length(4, 100)
      firstname: string
 
      @Column()
+     @Length(4, 100)
      lastname: string
 
     @Column()
+    @Length(4, 100)
     surname: string
 
     @Column()
+    @Length(4, 20)
     nickname: string
 
     @Column()
+    @Length(4, 100)
     password: string
 
     @Column()
@@ -40,4 +49,12 @@ import {Order} from './Order'
 
     @OneToMany(() => Order, order => order.user)
      order: Order[]
+
+     hashPassword() {
+         this.password = bcrypt.hashSync(this.password, 10)
+     }
+
+     checkIfUnencryptedPasswordIsValid(unencryptedPAssword: string) {
+         return bcrypt.compareSync(unencryptedPAssword, this.password)
+     }
  }
