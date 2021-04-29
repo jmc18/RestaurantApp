@@ -14,5 +14,5 @@ export class Table {
     status: string
 
     @OneToMany(() => Order, order => order.table)
-     order: Order
+     order: Order[]
 }

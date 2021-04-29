@@ -2,6 +2,8 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'type
 import {Table} from './Table'
 import {User} from './User'
 import {Plate} from './Plate'
+import {OrderDetail} from './OrderDetail'
+import { OrderDetailPackage } from './OrderDetailPackage'
 
 @Entity()
 export class Order {
@@ -25,6 +27,12 @@ export class Order {
     table: Table;
 
     @OneToMany(() => Plate, plate => plate.orders)
-     plates: Plate
+     plates: Plate[]
+
+    @OneToMany(() => OrderDetail, orderDetail => orderDetail.orders)
+    orderDetailOrder: OrderDetail[]
+
+    @OneToMany(() => OrderDetailPackage, orderDetailPackage => orderDetailPackage.order)
+    orderDetailPackage: OrderDetailPackage[]
 
 }

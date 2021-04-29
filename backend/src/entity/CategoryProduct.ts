@@ -11,5 +11,5 @@ export class CategoryProduct {
     categoryName: string
 
     @OneToMany(() => Product, product => product.categoryProducts)
-     products: Product
+     products: Product[]
 }

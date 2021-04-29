@@ -39,5 +39,5 @@ import {Order} from './Order'
     isActive: string
 
     @OneToMany(() => Order, order => order.user)
-     order: Order
+     order: Order[]
  }
