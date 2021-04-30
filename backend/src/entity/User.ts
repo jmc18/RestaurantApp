@@ -6,7 +6,7 @@ import {Length, IsNotEmpty} from 'class-validator'
 import * as bcrypt from 'bcryptjs'
 
  @Entity()
- @Unique(["nickname, email"])
+ @Unique(["nickname"])
  export class User {
 
     @PrimaryGeneratedColumn('uuid')

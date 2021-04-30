@@ -19,21 +19,20 @@ class AuthController {
         let user: User
         try {
             user = await userRepository.findOneOrFail({where: {nickname}})
+            // Check if encrypted password match
+            if(!user.checkIfUnencryptedPasswordIsValid(password)) {
+                res.status(401).send()
+                return
+            }
+
+            // Sing JWT, valid for 1 hour
+            const token = jwt.sign({userId: user.userId, nickname: user.nickname, userName: `${user.firstname} ${user.lastname}`}, config.jwtScreet, {expiresIn: "2h"})
+
+            // send the jwt in the response
+            res.send(token)
         } catch(error){
             res.status(401).send()
         }
-
-        // Check if encrypted password match
-        if(!user.checkIfUnencryptedPasswordIsValid(password)) {
-            res.status(401).send()
-            return
-        }
-
-        // Sing JWT, valid for 1 hour
-        const token = jwt.sign({userId: user.userId, nickname: user.nickname, userName: `${user.firstname} ${user.lastname}`}, config.jwtScreet, {expiresIn: "2h"})
-
-        // send the jwt in the response
-        res.send(token)
     }
 
     static changePassword = async (req: Request, res: Response) => {

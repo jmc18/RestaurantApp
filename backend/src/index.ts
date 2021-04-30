@@ -4,7 +4,7 @@ import cors from 'cors'
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 
-import routes from './routes'
+import routes from './routes/'
 
 const app = express()
 
