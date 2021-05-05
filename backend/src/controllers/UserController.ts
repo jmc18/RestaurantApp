@@ -34,22 +34,33 @@ class UserController {
     static addUser = async(req: Request, res: Response): Promise<Response> => {
         
         // Get paramaters from the body
-        const userData: User = req.body.userData
+        const {firstname, lastname, surname, nickname, password, email, phone, address, isActive, role} = req.body.userData
         
+        let user = new User();
+        user.firstname = firstname
+        user.lastname = lastname
+        user.surname = surname
+        user.nickname = nickname
+        user.password = password
+        user.email = email
+        user.phone = phone
+        user.address = address
+        user.isActive = isActive
+        user.role = role
 
         // Validate if the parameter are ok
-        const errors = await validate(userData)
+        /*const errors = await validate(user)
         if(errors.length > 0) {
             return res.status(400).send();
-        }
+        }*/
 
         // Hash the password, to securely store on database
-        userData.hashPassword()
+        user.hashPassword()
 
         // Try to save. If fails, the nickname is already in use
         const userRepository = getRepository(User)
         try {
-            await userRepository.save(userData)
+            await userRepository.save(user)
         } catch (e) {
             return res.status(409).send('nickname already in use')
         }
@@ -112,3 +123,5 @@ class UserController {
         return res.status(204).send()
     }
 }
+
+export default UserController
